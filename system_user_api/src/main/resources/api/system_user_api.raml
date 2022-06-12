@@ -1,0 +1,63 @@
+#%RAML 1.0
+title: flash-user-onboarding-sapi
+
+version: v1
+
+description: System Api for the users
+
+protocols:
+  - HTTP
+  - HTTPS
+
+mediaType: 
+- application/json
+
+types:
+  usertypes: !include /DataTypes/userDataType.raml
+
+/users:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              
+  post:
+    body:
+      application/json:
+        type: usertypes
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              {
+                "message " : "User details added"
+              }
+  delete:
+    queryParameters:
+      userid:
+        type: number
+        required: true
+    responses:
+      204:
+        body:
+          application/json:
+            
+  patch:
+    queryParameters:
+      userid:
+        type: number
+        required: true
+    body:
+      application/json:
+        type: usertypes
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                "message" : "Updated details"
+              }

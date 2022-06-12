@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="system_user_api-suite.xml" />
+	<munit:test name="get:\users:system_user_api-config-test" doc:id="0b3a405e-7292-4814-bb3d-8fcb1631106d" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Input" doc:id="08b78d0b-68c8-462b-a76a-b6bca46c7500" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://getuserssystemuserapiconfigtest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://getuserssystemuserapiconfigtest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getuserssystemuserapiconfigtest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\users:system_user_api-config" doc:id="6d2baaae-9967-4ec8-b052-19efdcc376c6" name="get:\users:system_user_api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="35aefd34-06d5-46e1-b50e-d330f27b90b0" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import getuserssystemuserapiconfigtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="post:\users:application\json:system_user_api-config-test" doc:id="e35e1ec9-e306-44e5-93b3-c48485b49197" >
+		<munit:behavior >
+			<munit:set-event doc:name="Set Input" doc:id="189e511c-afd8-4a4c-b792-792ed14bd044" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://postusersapplicationjsonsystemuserapiconfigtest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://postusersapplicationjsonsystemuserapiconfigtest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://postusersapplicationjsonsystemuserapiconfigtest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to post:\users:application\json:system_user_api-config" doc:id="ad47d7b7-e6e6-40e8-b96e-49387ea48059" name="post:\users:application\json:system_user_api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="a97c82c7-120c-490d-a5b1-02169bebeba1" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import postusersapplicationjsonsystemuserapiconfigtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
