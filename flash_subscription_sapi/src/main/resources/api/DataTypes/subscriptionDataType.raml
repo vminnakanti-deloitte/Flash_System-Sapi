@@ -1,0 +1,25 @@
+#%RAML 1.0 DataType
+
+type : object
+properties:
+  userid:
+    type: number
+    example: 123
+  connection_type:
+    type: string
+    enum: 
+    - Wifi
+    - TV
+    - Hybrid
+  charges:
+    type: number
+    example: 400
+  duration:
+    type: string
+    example: 1 month
+  date:
+    type: date-only
+    example: 2022-02-15
+  operator:
+    type: string
+    example: abc

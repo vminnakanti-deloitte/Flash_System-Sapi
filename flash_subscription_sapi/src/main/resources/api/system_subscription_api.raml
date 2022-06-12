@@ -1,0 +1,69 @@
+#%RAML 1.0
+title: System_Subscription_Api
+
+version: v1
+
+description: System Api for the subscription
+
+protocols:
+  - HTTP
+  - HTTPS
+
+mediaType: 
+- application/json
+
+types:
+  subscriptionTypes: !include /DataTypes/subscriptionDataType.raml
+
+/subscriptions:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: subscriptionTypes
+              
+  post:
+    body:
+      application/json:
+        type: subscriptionTypes
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              {
+                "message " : "Subscriber details added"
+              }
+  delete:
+    queryParameters:
+      Subscriberid:
+        type: number
+        required: true
+    responses:
+      204:
+        body:
+          application/json:
+            example:
+              {
+                "message": "Subscriber details Deleted"
+              }
+              
+            
+  patch:
+    queryParameters:
+      subscriberid:
+        type: number
+        required: true
+    body:
+      application/json:
+        type: subscriptionTypes
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                "message" : "Updated subscriber details"
+              }
+
