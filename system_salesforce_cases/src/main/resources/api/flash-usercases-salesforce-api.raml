@@ -1,0 +1,36 @@
+#%RAML 1.0
+title: flash-usercases-salesforce-api
+
+version: v1
+
+description: The api is using for sending users cases into salesforce
+
+protocols:
+  - HTTP
+  - HTTPS
+
+mediaType: 
+- application/json
+
+types:
+  usertypes: !include /dataType.raml
+/cases:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              
+  post:
+    body:
+      application/json:
+        type: usertypes
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              {
+                "message":"User cases added successfully"
+              }
